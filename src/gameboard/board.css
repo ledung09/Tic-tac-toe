@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+* {
+  /* box-sizing: content-box !important; */
+}
+
+.container {
+  
+}
+
+.cont-r1,
+.cont-r2 {
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper {
+  border: 0.5px solid silver;
+}
+
+.wrapper1 {
+  height: 100px;
+  background-color: white;
+}
+
+.wrapper2 {
+  height: 10px;
+  background-color: #14bdac;
+}
+
+
+
+.dropdown-item:hover {
+  background-color: #E5E5E5 !important;
+}
