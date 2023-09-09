@@ -183,3 +183,20 @@
     opacity: 1;
   }
 } 
+
+
+.fadeOut {
+  animation: fadeOut 0.8s ease 0s 1 normal backwards;
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	100% {
+		opacity: 0;
+		transform: scale(0.6);
+	}
+}

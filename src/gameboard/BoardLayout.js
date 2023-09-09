@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { CheckWin } from '../solver/CheckWin';
 
 
 export default function BoardLayout() {
@@ -41,10 +42,18 @@ export default function BoardLayout() {
       turn === 1 ? "fa-xmark" : "fa-o",
       "show-up"
     );
-
     piece[piece_idx].appendChild(iTag);
 
     setTurn(1 - turn);
+
+    console.log(CheckWin(board_cpy))
+
+    if (CheckWin(board_cpy) === 1) {
+      annouWinner(1)
+    }
+      
+    // Evaluate board_cpy here!!
+    // May be try delay to check
   };
 
 
@@ -78,7 +87,20 @@ export default function BoardLayout() {
     if (piece_type !== 1) setTurn(1)
 
 
+
+
     setAllowChangeP(0)
+  }
+
+  const annouWinner = (piece_type) => {
+    // 0 - 1 - 2 (Draw)
+    const board = document.querySelector('.board')
+    board.classList.add('fadeOut')
+      
+    setTimeout(() => {
+      board.style.opacity = "0"
+    }, 0)
+    // board.classList.remove('fadeOut')
   }
 
 
