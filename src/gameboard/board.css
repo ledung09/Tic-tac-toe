@@ -41,20 +41,28 @@
 
 /* Turn section */
 .player-turn {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .turn-r {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 16px;
 }
 
 .turn-c {
   border: 1px solid #DADCE0;
   border-radius: 5px;
-  border-bottom: 2px solid #14bdac;
+  border-bottom: 1px solid #14bdac;
   cursor: pointer;
+}
+
+.turn-c1 {
+  box-shadow: 2px 2px 6px 2px rgba(0,0,0,0.1);
+}
+
+.turn-c2 {
+  border: 2px solid #DADCE0; 
 }
 
 .turn-r-c {
@@ -219,7 +227,41 @@
 	}
 }
 
+/* Turn display */
+.turn-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
 
+.turn-display .o-turn {
+  line-height: 24px;
+  margin-right: 8px;
+  font-weight: 700;
+  animation: myAnim 0.1s ease 0s 1 normal forwards;
+}
+
+.turn-display .x-turn {
+  line-height: 24px;
+  margin-right: 8px;
+  font-size: 20px;
+  animation: myAnim 0.3s ease 0s 1 normal forwards;
+}
+
+@keyframes myAnim {
+	0% {
+		transform: scale(0.5);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+.turn-txt {
+  margin-bottom: 2px;
+}
 
 /* Win move */
 .winMove {
@@ -357,36 +399,6 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* @keyframes topShow {
-	0% {
-		opacity: 0;
-		transform: translateY(-50px);
-	}
-
-	100% {
-		opacity: 1;
-		transform: translateY(0);
-	}
-} */
-
-
-
-
-
 /* Winner screen */
 
 
@@ -423,6 +435,7 @@
   color: #545454;
   display: none;
   animation: fadeIn 0.2s ease 0s 1 normal forwards;
+  cursor: pointer;
 }
 
 
