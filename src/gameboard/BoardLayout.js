@@ -7,6 +7,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
 export default function BoardLayout() {
+  const [allowChangeP, setAllowChangeP] = useState(1)
+
   const [gameMode, setGameMode] = useState(0)
   
 
@@ -22,6 +24,8 @@ export default function BoardLayout() {
   };
 
   const setPos = (piece_idx) => {
+    setAllowChangeP(0);
+
     const piece = document.querySelectorAll(".piece");
     const board_cpy = [...board];
 
@@ -67,6 +71,16 @@ export default function BoardLayout() {
 
   }
 
+  const changP = (piece_type) => {
+    console.log(allowChangeP)
+    if (!allowChangeP) return;
+    alert('Work!!')
+    if (piece_type !== 1) setTurn(1)
+
+
+    setAllowChangeP(0)
+  }
+
 
 
   return (
@@ -91,7 +105,8 @@ export default function BoardLayout() {
                     setGameMode((prevState)=>{
                       if (prevState !== 0) {
                         resetBoard();
-                        setTurn(1)
+                        setTurn(1);
+                        setAllowChangeP(1);
                       }
                       return 0;
                     });
@@ -102,6 +117,7 @@ export default function BoardLayout() {
                 <NavDropdown.Item 
                   // href="#action/3.2"
                   onClick={() => {
+                    setAllowChangeP(0);
                     setGameMode((prevState)=>{
                       if (prevState !== 1) {
                         resetBoard();
@@ -122,6 +138,7 @@ export default function BoardLayout() {
               <Col 
                 className="turn-c turn-c1"
                 xs={3}
+                onClick={()=>changP(1)}
               >
                 <div className="turn-r-c">
                   <i className="turn-r-c1 turnX fa-solid fa-xmark"></i>
@@ -131,10 +148,11 @@ export default function BoardLayout() {
               <Col 
                 className="turn-c turn-c1"
                 xs={3}
+                onClick={()=>changP(0)}
               >
                 <div className="turn-r-c">
                   <i className="turn-r-c1 turnY fa-regular fa-o"></i>
-                  <p className="turn-r-c2">1</p>
+                  <p className="turn-r-c2">-</p>
                 </div>
               </Col>
             </Row>							
