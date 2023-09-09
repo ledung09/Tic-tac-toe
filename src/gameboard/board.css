@@ -94,14 +94,16 @@
 /* Board section */
 
 .wrapper2 {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 340px;
+  height: 360px;
   background-color: #14bdac;
 }
 
 .board {
+  position: absolute;
   box-sizing: content-box !important;
   width: 300px;
   height: 300px;
@@ -186,7 +188,7 @@
 
 
 .fadeOut {
-  animation: fadeOut 0.8s ease 0s 1 normal backwards;
+  animation: fadeOut 2s ease 0s 1 normal backwards;
 }
 
 @keyframes fadeOut {
@@ -199,4 +201,234 @@
 		opacity: 0;
 		transform: scale(0.6);
 	}
+}
+
+.fadeIn {
+  animation: fadeIn 2s ease 0s 1 normal forwards;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+		transform: scale(0.6);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+
+
+/* Win move */
+.winMove {
+  display: none;
+  position: absolute;
+  border-radius: 5px;
+  height: 10px;
+  width: 300px;
+  background-color: #545454;
+}
+
+.show-r {
+  rotate: 0deg;
+  width: 320px;
+}
+
+.show-c {
+  rotate: -90deg;
+  width: 320px;
+}
+
+.show-d {width: 435px;}
+.show-d1 {rotate: 45deg;}
+.show-d2 {rotate: -45deg;}
+
+.show-rc1 {transform: translate(0, -100px);}
+.show-rc2 {transform: translate(0, 0);}
+.show-rc3 {transform: translate(0, 100px);}
+
+.s-r1 {animation: s-r1 0.2s cubic-bezier(0.12, 0, 0.39, 0) 0s 1 normal none;}
+.s-r2 {animation: s-r2 0.2s cubic-bezier(0.12, 0, 0.39, 0) 0s 1 normal none;}
+.s-r3 {animation: s-r3 0.2s cubic-bezier(0.12, 0, 0.39, 0) 0s 1 normal none;}
+.s-c1 {animation: s-c1 0.2s cubic-bezier(0.12, 0, 0.39, 0) 0s 1 normal none;}
+.s-c2 {animation: s-c2 0.2s cubic-bezier(0.12, 0, 0.39, 0) 0s 1 normal none;}
+.s-c3 {animation: s-c3 0.2s cubic-bezier(0.12, 0, 0.39, 0) 0s 1 normal none;}
+.s-d1 {animation: s-d1 0.2s cubic-bezier(0.12, 0, 0.39, 0) 0s 1 normal none;}
+.s-d2 {animation: s-d2 0.2s cubic-bezier(0.12, 0, 0.39, 0) 0s 1 normal none;}
+
+
+@keyframes s-r1 {
+	0% {
+		transform: translate(0, -100px) scaleX(0);
+		transform-origin: 0% 0%; rotate: 0deg;
+	}
+
+	100% {
+		transform: translate(0, -100px) scaleX(1);
+		transform-origin: 0% 0%; rotate: 0deg;
+	}
+}
+
+@keyframes s-r2 {
+	0% {
+		transform: translate(0, 0px) scaleX(0);
+		transform-origin: 0% 0%; rotate: 0deg;
+	}
+
+	100% {
+		transform: translate(0, 0px) scaleX(1);
+		transform-origin: 0% 0%; rotate: 0deg;
+	}
+}
+
+@keyframes s-r3 {
+	0% {
+		transform: translate(0, 100px) scaleX(0);
+		transform-origin: 0% 0%; rotate: 0deg;
+	}
+
+	100% {
+		transform: translate(0, 100px) scaleX(1);
+		transform-origin: 0% 0%; rotate: 0deg;
+	}
+}
+
+
+@keyframes s-c1 {
+	0% {
+		transform: translate(-155px, -65px) scaleX(0);
+		transform-origin: 0% 0%; rotate: 90deg;
+	}
+
+	100% {
+		transform: translate(-155px, -65px) scaleX(1);
+		transform-origin: 0% 0%; rotate: 90deg;
+	}
+}
+
+@keyframes s-c2 {
+	0% {
+		transform: translate(-155px, -165px) scaleX(0);
+		transform-origin: 0% 0%; rotate: 90deg;
+	}
+
+	100% {
+		transform: translate(-155px, -165px) scaleX(1);
+		transform-origin: 0% 0%; rotate: 90deg;
+	}
+}
+
+@keyframes s-c3 {
+	0% {
+		transform: translate(-155px, -265px) scaleX(0);
+		transform-origin: 0% 0%; rotate: 90deg;
+	}
+
+	100% {
+		transform: translate(-155px, -265px) scaleX(1);
+		transform-origin: 0% 0%; rotate: 90deg;
+	}
+}
+
+@keyframes s-d1 {
+	0% {
+		transform: translate(-60px, -155px) scaleX(0);
+		transform-origin: 0% 0%; rotate: 45deg;
+	}
+
+	100% {
+		transform: translate(-60px, -155px) scaleX(1);
+		transform-origin: 0% 0%; rotate: 45deg;
+	}
+}
+
+@keyframes s-d2 {
+	0% {
+		transform: translate(-67px, 152px) scaleX(0);
+		transform-origin: 0% 0%; rotate: -45deg;
+	}
+
+	100% {
+		transform: translate(-67px, 152px) scaleX(1);
+		transform-origin: 0% 0%; rotate: -45deg;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* @keyframes topShow {
+	0% {
+		opacity: 0;
+		transform: translateY(-50px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+} */
+
+
+
+
+
+/* Winner screen */
+
+
+
+.Xwin-icon {
+  text-align: center;
+  font-size: 180px;
+  line-height: 150px;
+}
+
+.win-txt {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 0px;
+  color: #545454;
+}
+
+
+.Ywin-icon {
+  color: #F2EBD3;
+}
+
+.Ywin-icon {
+  text-align: center;
+  font-size: 132px;
+  font-weight: 700 !important;
+  line-height: 150px;
+}
+
+.winnerAnn{
+  display: flex;
+  flex-direction: column;
+  color: #545454;
+  display: none;
+  animation: fadeIn 0.2s ease 0s 1 normal forwards;
+}
+
+
+.winnerDraw-r1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
