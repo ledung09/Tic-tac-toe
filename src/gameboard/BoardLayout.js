@@ -141,7 +141,7 @@ export default function BoardLayout() {
   
       setTimeout(() => {
         piece[bot_move].appendChild(bot_iTag);
-      }, 400)
+      }, 400) // tgian ghi 1 viên
   
       
       setTimeout(() => {
@@ -175,13 +175,13 @@ export default function BoardLayout() {
         }
         
         
-      }, 1200)
+      }, 700) //tgian chuyển thanh màu xanh
     }
     //
 
     setBoard(board_cpy);
     setTurn(1 - turn_cpy);
-
+    
     let time;
     if (gameMode === 1) time = 0; else time = 700;
     setTimeout(() => {
@@ -407,7 +407,7 @@ export default function BoardLayout() {
     let winMove;
     let delay;
 
-    if (piece_type === 2) delay = 600; else delay = 1200;
+    if (piece_type === 2) delay = 700; else delay = 800;
 
     
     if (piece_type === 0 || piece_type === 1) {
@@ -470,6 +470,8 @@ export default function BoardLayout() {
                         setTurn(-2);
                         setAllowChangeP(1);
                         setScore([0,0])
+                        const xMark = document.querySelector('#turn-X-dis')
+                        xMark.style.display = 'none'
                       }
                       return 0;
                     });
