@@ -1,5 +1,3 @@
-// Constants
-
 function transBoard(board, mode) {
   let board_cpy = [...board];
   let char_set;
@@ -14,9 +12,7 @@ function transBoard(board, mode) {
 }
 
 
-// Function to check if the game is over
 function gameOver(board) {
-// Check rows, columns, and diagonals for a win
   const winPatterns = [
     [0, 1, 2],
     [3, 4, 5],
@@ -35,13 +31,10 @@ function gameOver(board) {
     }
   }
 
-  // Check for a tie
   return !board.includes(" ");
 }
 
-// Function to evaluate the current board
 function evaluate(board) {
-  // Check for a win
   const winPatterns = [
     [0, 1, 2],
     [3, 4, 5],
@@ -62,11 +55,9 @@ function evaluate(board) {
     }
   }
 
-  // The game is a tie
   return 0;
 }
 
-// Minimax algorithm with alpha-beta pruning
 function minimax(board, depth, maximizingPlayer, alpha, beta) {
   if (gameOver(board)) {
     return evaluate(board);
@@ -105,7 +96,6 @@ function minimax(board, depth, maximizingPlayer, alpha, beta) {
   }
 }
 
-// Function to find the best move for the AI player (X)
 export function bestMove(old_board, mode) {
   let board;
   board = transBoard(old_board, mode);

@@ -1,13 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
-* {
-  /* box-sizing: content-box !important; */
-}
-
-.container {
-  
-}
-
 .cont-r1,
 .cont-r2 {
   display: flex;
@@ -21,11 +13,10 @@
 .wrapper1 {
   height: fit-content;
   background-color: white;
+  margin-top: 50px !important;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
-
-
-
-
 
 .dropdown-item:hover {
   background-color: #E5E5E5 !important;
@@ -108,6 +99,8 @@
   align-items: center;
   height: 360px;
   background-color: #14bdac;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .board {
@@ -146,8 +139,6 @@
   color: #F2EBD3;
 }
 
-
-/*  */
 .show-up {
   animation: showUp 0.15s ease forwards;
 }
@@ -193,7 +184,6 @@
     opacity: 1;
   }
 } 
-
 
 .fadeOut {
   animation: fadeOut 2s ease 0s 1 normal backwards;
@@ -302,7 +292,6 @@
 .s-d1 {animation: s-d1 0.2s cubic-bezier(0.12, 0, 0.39, 0) 0s 1 normal none;}
 .s-d2 {animation: s-d2 0.2s cubic-bezier(0.12, 0, 0.39, 0) 0s 1 normal none;}
 
-
 @keyframes s-r1 {
 	0% {
 		transform: translate(0, -100px) scaleX(0);
@@ -338,7 +327,6 @@
 		transform-origin: 0% 0%; rotate: 0deg;
 	}
 }
-
 
 @keyframes s-c1 {
 	0% {
@@ -400,10 +388,7 @@
 	}
 }
 
-
 /* Winner screen */
-
-
 
 .Xwin-icon {
   text-align: center;
@@ -418,7 +403,6 @@
   margin-bottom: 0px;
   color: #545454;
 }
-
 
 .Ywin-icon {
   color: #F2EBD3;
@@ -439,7 +423,6 @@
   animation: fadeIn 0.2s ease 0s 1 normal forwards;
   cursor: pointer;
 }
-
 
 .winnerDraw-r1 {
   display: flex;
