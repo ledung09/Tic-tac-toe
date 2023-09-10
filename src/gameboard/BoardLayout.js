@@ -5,6 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { CheckWin } from "../solver/CheckWin";
+import { bestMove } from "../solver/Bot";
 
 export default function BoardLayout() {
   const [gameTurn, setGameTurn] = useState(1)
@@ -13,6 +14,8 @@ export default function BoardLayout() {
   const [gameStop, setGameStop] = useState(false);
 
   const [gameMode, setGameMode] = useState(0);
+  const [game1Mode, setGame1Mode] = useState(0);
+
 
   const [turn, setTurn] = useState(-2);
   const [board, setBoard] = useState([-1, -1, -1, -1, -1, -1, -1, -1, -1]);
@@ -30,17 +33,23 @@ export default function BoardLayout() {
   };
 
   const setPos = (piece_idx) => {
+    const xMark = document.querySelector('#turn-X-dis')
+    const yMark = document.querySelector('#turn-Y-dis')
+
+    
     let turn_cpy;
     if (turn === -2) turn_cpy = 1; else turn_cpy = turn;
     if (gameStop) return;
     setAllowChangeP(0);
-
     const piece = document.querySelectorAll(".piece");
     const board_cpy = [...board];
 
+    // Stable
+
+    
+
     if (board_cpy[piece_idx] !== -1) return;
     board_cpy[piece_idx] = turn_cpy;
-    setBoard(board_cpy);
 
     const iTag = document.createElement("i");
     iTag.classList.add(
@@ -58,43 +67,203 @@ export default function BoardLayout() {
       turnC.style.border = '1px solid #DADCE0'
       turnC.style.boxShadow = 'none'
     })
-
     turnCs[turn_cpy].style.borderBottom = '2px solid #14bdac'
     turnCs[turn_cpy].style.boxShadow = '2px 2px 6px 2px rgba(0,0,0,0.1)'
 
+    if (turn_cpy === 0) {
+      xMark.style.display = 'block'
+      yMark.style.display = 'none'
+    } else {
+      xMark.style.display = 'none'
+      yMark.style.display = 'block'
+    } 
+
+    // check if gamemode == 0?
+
+    if (gameMode === 0) {
+      turn_cpy = 1-turn_cpy;
+
+      console.log(game1Mode)
+      let bot_move = bestMove(board_cpy, game1Mode);
+      
+      if (bot_move === -1) {
+        if (
+          CheckWin(board_cpy)[0] === 0 ||
+          CheckWin(board_cpy)[0] === 1 ||
+          CheckWin(board_cpy)[0] === 2
+        ) {
+          setGameStop(true);
+          xMark.style.display = 'none'
+          yMark.style.display = 'none'
+          setTurn(-1);
+          annouWinner(CheckWin(board_cpy));
+        }
+      }
+  
+  
+  
+      if (board_cpy[bot_move] !== -1) return;
+      board_cpy[bot_move] = turn_cpy;
+  
+  
+      const bot_iTag = document.createElement("i");
+      bot_iTag.classList.add(
+        "piece-txt",
+        turn_cpy === 1 ? "playerX" : "playerY",
+        turn_cpy === 1 ? "fa-solid" : "fa-regular",
+        turn_cpy === 1 ? "fa-xmark" : "fa-o",
+        "show-up"
+      );
+  
+  
+      setTimeout(() => {
+        if (game1Mode ===0) {
+          xMark.style.display = 'none'
+          yMark.style.display = 'block' 
+        } else {
+          xMark.style.display = 'block'
+          yMark.style.display = 'none' 
+        }
+        
+        turnCs.forEach((turnC) => {
+          turnC.style.border = '1px solid #DADCE0'
+          turnC.style.boxShadow = 'none'
+        })
+        if (game1Mode ===0) {
+          turnCs[1].style.borderBottom = '2px solid #14bdac'
+          turnCs[1].style.boxShadow = '2px 2px 6px 2px rgba(0,0,0,0.1)'
+        } else {
+          turnCs[0].style.borderBottom = '2px solid #14bdac'
+          turnCs[0].style.boxShadow = '2px 2px 6px 2px rgba(0,0,0,0.1)'
+        }
+        
+      }, 150)
+  
+      setTimeout(() => {
+        piece[bot_move].appendChild(bot_iTag);
+      }, 400)
+  
+      
+      setTimeout(() => {
+        if (game1Mode === 0) {
+          yMark.style.display = 'none'
+          xMark.style.display = 'block'
+        } else {
+          yMark.style.display = 'block'
+          xMark.style.display = 'none'
+        }
+
+        if (
+          CheckWin(board_cpy)[0] === 0 ||
+          CheckWin(board_cpy)[0] === 1 ||
+          CheckWin(board_cpy)[0] === 2
+        ) {
+          xMark.style.display = 'none'
+          yMark.style.display = 'none'
+        } else {
+          turnCs.forEach((turnC) => {
+            turnC.style.border = '1px solid #DADCE0'
+            turnC.style.boxShadow = 'none'
+          })
+          if (game1Mode === 0) {
+            turnCs[0].style.borderBottom = '2px solid #14bdac'
+            turnCs[0].style.boxShadow = '2px 2px 6px 2px rgba(0,0,0,0.1)'
+          }  else {
+            turnCs[1].style.borderBottom = '2px solid #14bdac'
+            turnCs[1].style.boxShadow = '2px 2px 6px 2px rgba(0,0,0,0.1)'
+          }
+        }
+        
+        
+      }, 1200)
+    }
+    //
+
+    setBoard(board_cpy);
     setTurn(1 - turn_cpy);
 
+    let time;
+    if (gameMode === 1) time = 0; else time = 700;
+    setTimeout(() => {
+      if (
+        CheckWin(board_cpy)[0] === 0 ||
+        CheckWin(board_cpy)[0] === 1 ||
+        CheckWin(board_cpy)[0] === 2
+      ) {
+        setGameStop(true);
+        xMark.style.display = 'none'
+        yMark.style.display = 'none'
+        setTurn(-1);
+        annouWinner(CheckWin(board_cpy));
+      }
+    }, time)
 
-    if (
-      CheckWin(board_cpy)[0] === 0 ||
-      CheckWin(board_cpy)[0] === 1 ||
-      CheckWin(board_cpy)[0] === 2
-    ) {
-      setGameStop(true);
-      setTurn(-1)
-      annouWinner(CheckWin(board_cpy));
-    }
+    // if (gameMode === 1) {
+    //   if (
+    //     CheckWin(board_cpy)[0] === 0 ||
+    //     CheckWin(board_cpy)[0] === 1 ||
+    //     CheckWin(board_cpy)[0] === 2
+    //   ) {
+    //     setGameStop(true);
+    //     setTurn(-1);
+    //     annouWinner(CheckWin(board_cpy));
+    //   }
+    // } else {
+    //   setTimeout(() => {
+    //     if (
+    //       CheckWin(board_cpy)[0] === 0 ||
+    //       CheckWin(board_cpy)[0] === 1 ||
+    //       CheckWin(board_cpy)[0] === 2
+    //     ) {
+    //       alert('damn')
+    //       setGameStop(true);
+    //       setTurn(-1);
+    //       annouWinner(CheckWin(board_cpy));
+    //     }
+    //   }, 800)  // consider remove settimeout for 2P!!
+    // }
+    
+
+    // console.log(bestMove(board_cpy, game1Mode))
 
     // Evaluate board_cpy here!!
     // May be try delay to check
   };
 
   const resetBoard = (resetTurn) => {
+    setGame1Mode(0)
+    const xMark = document.querySelector('#turn-X-dis')
+    const yMark = document.querySelector('#turn-Y-dis')
+
+
     const turnCs = document.querySelectorAll('.turn-c')
     turnCs.forEach((turnC) => {
       turnC.style.border = '1px solid #DADCE0'
       turnC.style.boxShadow = 'none'
     })
+    
 
     if (resetTurn) {
       setGameTurn(1-gameTurn)
       setTurn(1-gameTurn) 
+      if (gameTurn === 0) {
+        xMark.style.display = 'block'
+        yMark.style.display = 'none'
+      } else {
+        xMark.style.display = 'none'
+        yMark.style.display = 'block'
+      } 
       turnCs[gameTurn].style.borderBottom = '2px solid #14bdac'
       turnCs[gameTurn].style.boxShadow = '2px 2px 6px 2px rgba(0,0,0,0.1)'
     } else {
       setScore([0, 0])
       turnCs[0].style.borderBottom = '2px solid #14bdac'
       turnCs[0].style.boxShadow = '2px 2px 6px 2px rgba(0,0,0,0.1)' 
+    }
+
+    if (gameMode === 0) {
+      xMark.style.display = 'none'
+      yMark.style.display = 'none'
     }
 
     setGameStop(false);
@@ -139,30 +308,94 @@ export default function BoardLayout() {
   };
 
   const changP = (piece_type) => {
+    const xMark = document.querySelector('#turn-X-dis')
+    const yMark = document.querySelector('#turn-Y-dis')
+    const piece = document.querySelectorAll(".piece");
+    const turnCs = document.querySelectorAll('.turn-c')
+
     if (!allowChangeP) return;
     // alert("Work!!");
     setTurn(piece_type)
+    setGame1Mode(1-piece_type)
+    
     if (piece_type === 0) {
       // Random firstmove HERE!
+
+      document.querySelector('.turn-txt').style.opacity = 0
       let randMove = Math.floor(Math.random() * 9);
-      setPos(randMove);
       const board_cpy = [...board]
       board_cpy[randMove] = 1
       setBoard(board_cpy)
+      // setPos(randMove);
+
+
+      
+      const rand_iTag = document.createElement("i");
+      rand_iTag.classList.add(
+        "piece-txt","playerX","fa-solid","fa-xmark","show-up"
+      );
+
+
+      setTimeout(() => {
+        document.querySelector('.turn-txt').style.opacity = 1
+        xMark.style.display = 'block'
+        yMark.style.display = 'none' 
+        
+        turnCs.forEach((turnC) => {
+          turnC.style.border = '1px solid #DADCE0'
+          turnC.style.boxShadow = 'none'
+        })
+        turnCs[0].style.borderBottom = '2px solid #14bdac'
+        turnCs[0].style.boxShadow = '2px 2px 6px 2px rgba(0,0,0,0.1)'
+      }, 50)
+
+      setTimeout(() => {
+        piece[randMove].appendChild(rand_iTag);
+      }, 600)
+
+      
+      setTimeout(() => {
+        yMark.style.display = 'block'
+        xMark.style.display = 'none' 
+        if (
+          CheckWin(board_cpy)[0] === 0 ||
+          CheckWin(board_cpy)[0] === 1 ||
+          CheckWin(board_cpy)[0] === 2
+        ) {
+          xMark.style.display = 'none'
+          yMark.style.display = 'none'
+        }
+        turnCs.forEach((turnC) => {
+          turnC.style.border = '1px solid #DADCE0'
+          turnC.style.boxShadow = 'none'
+        })
+        turnCs[1].style.borderBottom = '2px solid #14bdac'
+        turnCs[1].style.boxShadow = '2px 2px 6px 2px rgba(0,0,0,0.1)'
+        
+      }, 1100)
+
+
+
+
+
+
+
+
+
+      
       // 
-      const turnCs = document.querySelectorAll('.turn-c')
-      turnCs.forEach((turnC) => {
-        turnC.style.border = '1px solid #DADCE0'
-        turnC.style.boxShadow = 'none'
-      })
-      turnCs[1].style.borderBottom = '2px solid #14bdac'
-      turnCs[1].style.boxShadow = '2px 2px 6px 2px rgba(0,0,0,0.1)'
     }
 
     setAllowChangeP(0);
   };
 
   const annouWinner = (info) => {
+    // const xMark = document.querySelector('#turn-X-dis')
+    // const yMark = document.querySelector('#turn-Y-dis')
+
+    // xMark.style.display = 'none'
+    // yMark.style.display = 'none'
+
     // 0 - 1 - 2 (Draw)
     const validMove = ["r1", "r2", "r3", "c1", "c2", "c3", "d1", "d2"];
     const [piece_type, move] = info;
@@ -253,6 +486,7 @@ export default function BoardLayout() {
                         setScore([0,0])
                         resetBoard(false);
                         setTurn(1);
+                        document.querySelector('#turn-X-dis').style.display = 'block'
                       }
                       return 1;
                     });
@@ -290,8 +524,8 @@ export default function BoardLayout() {
           </div>
 
           <div className="turn-display">
-            {turn === 0 && <i className="fa-regular fa-o o-turn"></i>}
-            {turn === 1 && <i className="fa-solid fa-xmark x-turn"></i> }
+            <i id="turn-X-dis" className="fa-solid fa-xmark x-turn"></i>
+            <i id="turn-Y-dis" className="fa-regular fa-o o-turn"></i>
           
             
             {

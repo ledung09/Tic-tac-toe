@@ -62,7 +62,7 @@
 }
 
 .turn-c2 {
-  border: 2px solid #DADCE0; 
+  border: 1px solid #DADCE0; 
 }
 
 .turn-r-c {
@@ -233,9 +233,10 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 8px;
-}
+} 
 
 .turn-display .o-turn {
+  display: none;
   line-height: 24px;
   margin-right: 8px;
   font-weight: 700;
@@ -243,6 +244,7 @@
 }
 
 .turn-display .x-turn {
+  display: none;
   line-height: 24px;
   margin-right: 8px;
   font-size: 20px;
