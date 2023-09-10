@@ -143,6 +143,13 @@ export default function BoardLayout() {
     // alert("Work!!");
     setTurn(piece_type)
     if (piece_type === 0) {
+      // Random firstmove HERE!
+      let randMove = Math.floor(Math.random() * 9);
+      setPos(randMove);
+      const board_cpy = [...board]
+      board_cpy[randMove] = 1
+      setBoard(board_cpy)
+      // 
       const turnCs = document.querySelectorAll('.turn-c')
       turnCs.forEach((turnC) => {
         turnC.style.border = '1px solid #DADCE0'

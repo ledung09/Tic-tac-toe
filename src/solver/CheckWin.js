@@ -3,30 +3,26 @@ export function CheckWin(board) {
   // 0 / 1 = O / X
   // -1 = undone
 
-  // Check row
-  if (board[0] === board[1] && board[1] === board[2] && board[2] !== -1) 
-    return [board[0], 'r1'];
-  if (board[3] === board[4] && board[4] === board[5] && board[5] !== -1) 
-    return [board[3], 'r2'];
-  if (board[6] === board[7] && board[7] === board[8] && board[8] !== -1) 
-    return [board[6], 'r3'];
+  const winPatterns = [
+    [0, 1, 2, "r1"],
+    [3, 4, 5, "r2"],
+    [6, 7, 8, "r3"],
+    [0, 3, 6, "c1"],
+    [1, 4, 7, "c2"],
+    [2, 5, 8, "c3"],
+    [0, 4, 8, "d1"],
+    [2, 4, 6, "d2"],
+  ];
 
-  // Check col
-  if (board[0] === board[3] && board[3] === board[6] && board[6] !== -1) 
-    return [board[0], 'c1'];
-  if (board[1] === board[4] && board[4] === board[7] && board[7] !== -1) 
-    return [board[1], 'c2'];
-  if (board[2] === board[5] && board[5] === board[8] && board[8] !== -1) 
-    return [board[2], 'c3'];
-
-  // Check diag
-  if (board[0] === board[4] && board[4] === board[8] && board[8] !== -1) 
-    return [board[0], 'd1'];
-  if (board[2] === board[4] && board[4] === board[6] && board[6] !== -1) 
-    return [board[2], 'd2'];
+  for (const pattern of winPatterns) {
+    const [a, b, c, move] = pattern;
+    if (board[a] !== -1 && board[a] === board[b] && board[a] === board[c]) {
+      return [board[a], move];
+    }
+  }
 
   // Tie case
-  if (board.indexOf(-1) === -1) return [2, ''];
+  if (board.indexOf(-1) === -1) return [2, ""];
 
-  return [-1, ''];
+  return [-1, ""]; // Undone
 }
