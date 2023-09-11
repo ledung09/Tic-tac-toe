@@ -305,6 +305,9 @@ export default function BoardLayout() {
         turnCs[1].style.borderBottom = "2px solid #14bdac";
         turnCs[1].style.boxShadow = "2px 2px 6px 2px rgba(0,0,0,0.1)";
       }, 1100);
+    } else {
+      xMark.style.display = "block";
+      yMark.style.display = "none";
     }
 
     setAllowChangeP(0);
@@ -515,6 +518,47 @@ export default function BoardLayout() {
               <i className="Ywin-icon fa-regular fa-o"></i>
             </div>
             <p className="win-txt">DRAW!</p>
+          </div>
+        </Col>
+      </Row>
+      <Row className="cont-r3">
+        <Col className="wrapper wrapper3" xs={8}>
+          <div 
+            className="board-restart"
+            onClick={()=>
+              {
+                setTimeout(() => {
+                  resetBoard(gameMode === 0 ? true: false);
+                  setTurn(gameMode === 0 ? -2 : gameTurn);
+                  if (gameMode === 1) {
+                    const xMark = document.querySelector("#turn-X-dis");
+                    const yMark = document.querySelector("#turn-Y-dis");
+                    const turnCs = document.querySelectorAll(".turn-c");
+                    
+                    turnCs.forEach((turnC) => {
+                      turnC.style.border = "1px solid #DADCE0";
+                      turnC.style.boxShadow = "none";
+                    });
+                    
+                    if (gameTurn === 1) {
+                      xMark.style.display = "block";
+                      yMark.style.display = "none";
+                      turnCs[0].style.borderBottom = "2px solid #14bdac";
+                      turnCs[0].style.boxShadow = "2px 2px 6px 2px rgba(0,0,0,0.1)";
+                    } else {
+                      xMark.style.display = "none";
+                      yMark.style.display = "block";
+                      turnCs[1].style.borderBottom = "2px solid #14bdac";
+                      turnCs[1].style.boxShadow = "2px 2px 6px 2px rgba(0,0,0,0.1)";
+                    }
+                  } 
+                  setAllowChangeP(gameMode === 0 ? 1 : 0);
+                  setScore(score);
+                }, 200)
+              }  
+            }
+          >
+            Restart game
           </div>
         </Col>
       </Row>
