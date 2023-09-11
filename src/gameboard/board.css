@@ -508,7 +508,6 @@
     padding: 0px 10px !important;
   }
   
-
   .turn-r-c2 {
     margin-left: 15px;
   }
@@ -528,7 +527,6 @@
   .show-d {width: 313px; height: 9px;}
   .show-d1 {rotate: 45deg;}
   .show-d2 {rotate: -45deg;}
-
   .show-rc1 {transform: translate(0, -70px);}
   .show-rc2 {transform: translate(0, 0);}
   .show-rc3 {transform: translate(0, 70px);}
@@ -680,8 +678,6 @@
     margin-left: 15px;
     margin-right: 10px;
   }
-
-
   
   .show-r {
     rotate: 0deg;
@@ -698,7 +694,6 @@
   .show-d {width: 225px; height: 7px;}
   .show-d1 {rotate: 45deg;}
   .show-d2 {rotate: -45deg;}
-
   .show-rc1 {transform: translate(0, -50px);}
   .show-rc2 {transform: translate(0, 0);}
   .show-rc3 {transform: translate(0, 50px);}
@@ -786,5 +781,4 @@
       transform-origin: 0% 0%; rotate: -45deg;
     }
   }
-  
 }
