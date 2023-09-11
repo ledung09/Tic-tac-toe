@@ -248,7 +248,8 @@ export default function BoardLayout() {
     const yMark = document.querySelector("#turn-Y-dis");
     const piece = document.querySelectorAll(".piece");
     const turnCs = document.querySelectorAll(".turn-c");
-
+    
+    if (gameMode === 1) return;
     if (!allowChangeP) return;
     setTurn(piece_type);
     setGame1Mode(1 - piece_type);
